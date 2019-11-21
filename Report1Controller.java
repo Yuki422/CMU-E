@@ -34,43 +34,52 @@ import javafx.stage.Stage;
  */
 public class Report1Controller implements Initializable {
 
-   
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    public void gobutton1(ActionEvent event) throws IOException
-    {
+    }
+
+    /*
+    This function handles the gobutton1 action.
+    It opens the report2.fxml file and sets the scene to the window and then window is displayed!
+     */
+    public void gobutton1(ActionEvent event) throws IOException {
         Parent report = FXMLLoader.load(getClass().getResource("report2.fxml"));
         Scene reports = new Scene(report);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(reports);
         window.show();
     }
-    public void gobutton2(ActionEvent event) throws IOException
-    {
+
+    /*
+    This function handles the gobutton2 action.
+    It opens the report3.fxml file and sets the scene to the window and then window is displayed!
+     */
+    public void gobutton2(ActionEvent event) throws IOException {
         Parent report = FXMLLoader.load(getClass().getResource("report3.fxml"));
         Scene reports = new Scene(report);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(reports);
         window.show();
     }
-    
-    public void backbutton(ActionEvent event) throws IOException
-    {
+
+     /*
+    This function handles the back button action.
+    Upon clicking, it returns the window to the first screen.
+    It opens the page.fxml file and sets the scene to the window and then window is displayed!
+     */
+    public void backbutton(ActionEvent event) throws IOException {
         Parent report = FXMLLoader.load(getClass().getResource("page1.fxml"));
         Scene reports = new Scene(report);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(reports);
         window.show();
     }
-    
+
 }
