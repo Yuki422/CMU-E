@@ -158,12 +158,14 @@ public class Report3Controller implements Initializable {
             ResultSet rs1 = s.executeQuery("select visitdetails.reason, count(studentinfo.studentId) From STUDENTINFO inner join VISITdetails ON studentinfo.studentId = visitdetails.studentId and varchar(visitdetails.time) between '" + d1 + "%' and '" + d2 + "%' group by visitdetails.reason");
 
             // LocalDate d1 = date1.getValue();
+            
             // Observable list is being made to gather data from the database
             ObservableList<PieChart.Data> pieChartData1 = FXCollections.observableArrayList();
             while (rs1.next()) {
                 String a = rs1.getString(1);
                 String b = rs1.getString(2);
                 //  System.out.println(a);
+                //data added into observable array list
                 pieChartData1.add(new PieChart.Data(a, Integer.parseInt(b)));
                 // System.out.println(avg1);
             }

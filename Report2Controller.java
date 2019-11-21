@@ -118,6 +118,7 @@ public class Report2Controller implements Initializable {
             error.setText("Please select date");
             return;
         }
+        //pane1 is set
         pane1.setVisible(true);
         pane2.setVisible(false);
         Connection cnn;
@@ -156,12 +157,14 @@ public class Report2Controller implements Initializable {
             error.setText("Please select date");
             return;
         }
+        //pane2 is set
         pane1.setVisible(false);
         pane2.setVisible(true);
 
         Connection cnn;
         try {
 
+            //getting connection
             cnn = DriverManager.getConnection("jdbc:derby://localhost:1527/faceRecTrial", "App", "App");
             cnn.setAutoCommit(false);
             Statement s = cnn.createStatement();
