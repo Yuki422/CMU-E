@@ -18,7 +18,7 @@ import java.util.Properties;
 import static cmu.SetDB.printSQLException;import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 /**
- *
+ * This class is used for storing information of each visit of students.
  * @author ppsra
  */
 public class Visit {
@@ -29,6 +29,13 @@ public class Visit {
     public Visit()
     {}
     
+    /**
+     * Constructs Visit object and set fields according to arguments.
+     * @param a String object of studenID
+     * @param b String object of visitID
+     * @param c String object of reason
+     * @param time Timestamp objedt of visiting time
+     */
     public Visit(String a, String b, String c, Timestamp time) {
       
         this.studentID = new SimpleStringProperty(a);
@@ -37,28 +44,54 @@ public class Visit {
         this.time = time;
     }
     
-   public String getStudentID(){
+    /**
+     * Returns String object of studentID.
+     * @return String object of studentID
+     */
+    public String getStudentID(){
         return studentIDProperty().get();
     }
-   public String getReason()
+
+    /**
+     * Returns String object of visiting reason.
+     * @return Srring object of reason.
+     */
+    public String getReason()
    {
        return reasonProperty().get();
    }
-   public void setReason(String n)
+
+    /**
+     * Replaces reasonProperty field value with argument.
+     * @param n String object of reason
+     */
+    public void setReason(String n)
     {
         reasonProperty().set(n);
     }
    
-   public void setStudentID(String n)
+    /**
+     * Replaces studentID field value with argument.
+     * @param n String object of studentID
+     */
+    public void setStudentID(String n)
     {
         studentIDProperty().set(n);
     }
    
-   public StringProperty studentIDProperty()
+    /**
+     * Returns StringProperty object of studentID
+     * @return StringProperty object of studentID
+     */
+    public StringProperty studentIDProperty()
     {
         return studentID;
     }
    
+    /**
+     * Returns StringProperty object of reason
+     * @return StringProperty object of reason
+     */
     public StringProperty reasonProperty()
     {
         return reason;
