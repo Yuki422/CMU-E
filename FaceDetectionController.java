@@ -57,10 +57,8 @@ public class FaceDetectionController {
     private Button cameraButton;
     // the FXML area for showing the current frame
     @FXML
-    private ImageView originalFrame;
-    // checkboxes for enabling/disabling a classifier
+    private ImageView originalFrame; 
     
-
     // a timer for acquiring the video stream
     private ScheduledExecutorService timer;
     // the OpenCV object that performs the video capture
@@ -71,11 +69,14 @@ public class FaceDetectionController {
     // face cascade classifier
     private CascadeClassifier faceCascade;
     private int absoluteFaceSize;
+    // FaceRecoginition object
     private FaceRecognitionEigenFaces faceRecognise;
+    
     /**
      * Init the controller, at start time
      */
     protected void init() {
+        //Load the OPENCV Library
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         this.capture = new VideoCapture();
         this.faceCascade = new CascadeClassifier();
@@ -85,6 +86,7 @@ public class FaceDetectionController {
         originalFrame.setFitWidth(600);
         // preserve image ratio
         originalFrame.setPreserveRatio(true);
+        //load the face detector xml file
         faceCascade.load("lbpcascade_frontalface.xml");
     }
 
@@ -93,6 +95,7 @@ public class FaceDetectionController {
      */
     @FXML
     protected void startCamera(ActionEvent event) throws IOException {
+        
         if (!this.cameraActive) {
             // disable setting checkboxes
 
@@ -129,6 +132,7 @@ public class FaceDetectionController {
             File file = null;
             Mat frame = grabFinalFrame();
             try {
+                //calling function to detect and save the image
                 file = detectAndSave(frame);
             } catch (IOException ex) {
                 Logger.getLogger(FaceDetectionController.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,8 +141,10 @@ public class FaceDetectionController {
             this.cameraActive = false;
             // update again the button content
             this.cameraButton.setText("Start Camera");
+            // stop the camera
             this.stopAcquisition();
             
+            // caling the visionAPI to detect the Emotion of the face
             try{
                 VisionAPI.detectFaces(file);
             }catch(Exception e){
@@ -196,7 +202,11 @@ public class FaceDetectionController {
 
         return frame;
     }
-
+    
+    /**
+    * This function detects the face and captures the image of the person and saves it.
+    *
+    */
     private File detectAndSave(Mat frame) throws IOException {
         MatOfRect faces = new MatOfRect();
         Mat grayFrame = new Mat();
@@ -236,13 +246,13 @@ public class FaceDetectionController {
         try (Stream<Path> files = Files.list(Paths.get(filePath))) {
             count = files.count();
         }
-        //System.out.println("saving in path : " + filePath);
+        System.out.println("saving in path : " + filePath);
         outputFile = new File(filePath + "image_" + (count + 1) + ".jpg");
 //        System.out.println(basePath + "\\src\\main\\java\\cmu\\saved_images\\image_" + (count + 1) + ".jpg;1");
         ImageIO.write(Utils.matToBufferedImage(frame), "jpg", outputFile);
-        //System.out.println("Done!!");
+        System.out.println("File Saving Done!!");
 //        }
-
+        //returns the captured image.
         return outputFile;
     }
 
