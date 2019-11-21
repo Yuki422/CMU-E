@@ -34,8 +34,11 @@ public class Page1Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    @FXML
     
+    /**
+     * Loads the dashboard screen
+     */
+	@FXML
     public void handleButtonAction1(ActionEvent event) throws IOException {
         Parent report = FXMLLoader.load(getClass().getResource("dash.fxml"));
         Scene reports = new Scene(report);
@@ -45,6 +48,10 @@ public class Page1Controller implements Initializable {
         window.show();
         
     }
+	
+    /**
+     * Loads the Reports Menu
+     */
     public void handleButtonAction(ActionEvent event) throws IOException {
         Parent report = FXMLLoader.load(getClass().getResource("report1.fxml"));
         Scene reports = new Scene(report);
@@ -55,6 +62,9 @@ public class Page1Controller implements Initializable {
         
     }
     
+    /**
+     * Loads the camera for face detetction
+     */
     public void handleButtonAction2(ActionEvent event) throws IOException{
         try
 		{
@@ -89,10 +99,6 @@ public class Page1Controller implements Initializable {
 		catch (Exception e)
 		{
 			e.printStackTrace();
-		}
-        
-    }
-    
-      
-    
+		}   
+    }    
 }
