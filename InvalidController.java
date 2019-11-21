@@ -48,7 +48,7 @@ import javafx.stage.Stage;
  * @author ppsra
  */
 public class InvalidController implements Initializable {
-
+	//Declare all of FXML Elements
     ObservableList<String> reasonList = FXCollections.observableArrayList("Student Club Enquiry", "Asking for Directions to Class", "General Enquiry", "Fee Enquiry", "Course Schedule Enquiry", "Other");
     ObservableList<String> programList = FXCollections.observableArrayList("GlobalMISM", "MSIT", "MSPPM");
     ObservableList<String> genderList = FXCollections.observableArrayList("Male", "Female", "Other");
@@ -89,7 +89,9 @@ public class InvalidController implements Initializable {
         }
 
     }
-
+	/**
+     * A method to save the details of the new student.
+     */
     @FXML
     private void saveBtn(ActionEvent event) {
         if ((tx1.getText().isEmpty()) || (tx2.getText().isEmpty()) || (tx6.getText().isEmpty()) || (cb.getValue().isEmpty()) || (cb2.getValue().isEmpty()) || (cb21.getValue().isEmpty()) || dob.getValue()==null) {
@@ -100,7 +102,7 @@ public class InvalidController implements Initializable {
           
         Connection cnn;
         try {
-            
+            //Creating required connection to the database
             File file = new File("/Users/apple/NetBeansProjects/CMU/src/pictures/analytics.png");
             cnn = DriverManager.getConnection("jdbc:derby://localhost:1527/faceRecTrial", "App", "App");
             cnn.setAutoCommit(false);
@@ -110,11 +112,8 @@ public class InvalidController implements Initializable {
             PreparedStatement psInsert = cnn.prepareStatement("insert into StudentInfo values (?, ?, ?, ?, ?, ?)");
             psInsert.setString(1, tx1.getText());
             psInsert.setString(2, tx2.getText());
-            psInsert.setString(3, (String) cb2.getValue());
-            
+            psInsert.setString(3, (String) cb2.getValue());      
             psInsert.setDate(4,Date.valueOf(dob.getValue()));
-            
-           
             psInsert.setString(5, tx6.getText());
             psInsert.setString(6, (String) cb21.getValue());
             psInsert.executeUpdate();
@@ -124,20 +123,17 @@ public class InvalidController implements Initializable {
             Random r=new Random();
             int min=1,max=100000;
             int inv_no=r.nextInt(max-min)+min;
-      
             String abc ="V" + inv_no;
-            psInsert2.setString(1, abc);
-            
+            psInsert2.setString(1, abc);        
             psInsert2.setString(2, tx1.getText());
             psInsert2.setString(3, (String) cb.getValue());
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String s1 = formatter.format(new Timestamp(System.currentTimeMillis()));
-            psInsert2.setString(4,s1);
-            //psInsert2.setTimestamp(4, java.sql.Timestamp.valueOf(sc.next()));
-            
+            psInsert2.setString(4,s1);  
             psInsert2.executeUpdate();
             cnn.commit();
             
+			//Setting Scence Back to the Dashboard
             Parent report = FXMLLoader.load(getClass().getResource("page1.fxml"));
             Scene reports = new Scene(report);
         
@@ -149,9 +145,4 @@ public class InvalidController implements Initializable {
             System.out.println(e);
         }
     }
-
-    @FXML
-    private void cb(MouseEvent event) {
-    }
-
 }
