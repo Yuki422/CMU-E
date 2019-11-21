@@ -21,7 +21,7 @@ public class CMU extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("page1.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("page1.fxml")); //this loads the landing page
        // stage.initStyle(StageStyle.UNDECORATED);
         
         Scene scene = new Scene(root);
@@ -35,7 +35,7 @@ public class CMU extends Application {
      */
     public static void main(String[] args) throws SQLException {
  //       SetDB.main(args);
-        launch(args);
+        launch(args); //to launch the application
     }
     
 }

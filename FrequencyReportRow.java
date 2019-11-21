@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author apple
  */
 public class FrequencyReportRow {
+     //studentId is declared as simplestringproperty and its getter, setter and property methods are written
      private SimpleStringProperty studentID;
      public void setStudentID(String value) { StudentIDProperty().set(value); }
      public String getStudentID() { return StudentIDProperty().get(); }
@@ -17,6 +18,7 @@ public class FrequencyReportRow {
          if (studentID == null) studentID = new SimpleStringProperty(this, "studentID");
          return studentID;
      }
+     //name is declared as simplestringproperty and its getter, setter and property methods are written
      private SimpleStringProperty name;
      public void setName(String value) { nameProperty().set(value); }
      public String getName() { return nameProperty().get(); }
@@ -24,6 +26,7 @@ public class FrequencyReportRow {
          if (name == null) name = new SimpleStringProperty(this, "name");
          return name;
      }
+     //gender is declared as simplestringproperty and its getter, setter and property methods are written
      private SimpleStringProperty gender;
      public void setGender(String value) { genderProperty().set(value); }
      public String getGender() { return genderProperty().get(); }
@@ -31,7 +34,7 @@ public class FrequencyReportRow {
          if (gender == null) gender = new SimpleStringProperty(this, "gender");
          return gender;
      }
-     
+     //program is declared as simplestringproperty and its getter, setter and property methods are written
      private SimpleStringProperty program;
      public void setProgram(String value) { programProperty().set(value); }
      public String getrogram() { return programProperty().get(); }
@@ -39,6 +42,7 @@ public class FrequencyReportRow {
          if (program == null) program = new SimpleStringProperty(this, "program");
          return program;
      }
+     //reason is declared as simplestringproperty and its getter, setter and property methods are written
      private SimpleStringProperty reason;
      public void setReason(String value) { reasonProperty().set(value); }
      public String getReason() { return reasonProperty().get(); }
@@ -46,7 +50,7 @@ public class FrequencyReportRow {
          if (reason == null) reason = new SimpleStringProperty(this, "reason");
          return reason;
      }
-   
+    //parameterised contsructor for FrquencyReportRow
     FrequencyReportRow(String studentID, String name, String gender, String program, String reason) {
         this.studentID = new SimpleStringProperty(studentID);
         this.name = new SimpleStringProperty(name);
