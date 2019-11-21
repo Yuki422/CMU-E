@@ -25,22 +25,21 @@ public class SetDB {
     private String protocol = "jdbc:derby:";
 
     /**
-     * @param args the command line arguments
+	 * @param args The command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         new SetDB().go(args);
         System.out.println("Database setup finished");
-        //ArrayList<Student> st = (new Sampleconnection()).getStudentDetails();
-        //System.out.println("Trial Check :   " + st.get(0).name);
-
     }
     
-    
+    /**
+     * 
+	 * A method to create and populate the database
+	 * @param args  
+     */
     void go(String[] args) {
-        /* parse the arguments to determine which framework is desired*/
-        parseArguments(args);
-
+      
         System.out.println("Database setup in " + framework + " mode");
         Connection conn = null;
         PreparedStatement psInsert;
@@ -48,21 +47,12 @@ public class SetDB {
 
         ResultSet rs = null;
         try {
-            Properties props = new Properties(); // connection properties
-            // providing a user name and password is optional in the embedded
-            // and derbyclient frameworks
-            //props.put("user", "App");
-            //props.put("password", "");
-
+      
             String dbName = "faceRecTrial";
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/faceRecTrial;create=true","App","App");
+			
+			System.out.println("Connected to and created database " + dbName);
 
-           // System.out.println("Connection URL" + protocol + dbName + ";create=true");
-
-            System.out.println("Connected to and created database " + dbName);
-
-            /* Creating a statement object that we can use for running various
-             * SQL statements commands against the database.*/
             //CLEANUP PREVIOUS VALUES
            deleteAllTables(conn);
 
@@ -89,9 +79,14 @@ public class SetDB {
         }
 
     }
-
+	
+	 /**
+	 * Initialises the database from file
+	 * @param conn The database connection object 
+     */
     private void populateTables(Connection conn) {
         try {
+			//INITIALIZING FILE PATHS
             String directoryPath = System.getProperty("user.dir") + "\\src\\main\\java\\cmu\\";
             String StudentInfoFile = directoryPath + "StudentInfo.csv";
             String VisitDetailsFile = directoryPath + "VisitDetails.csv";
@@ -146,7 +141,8 @@ public class SetDB {
                 psInsert3.executeUpdate();
                 System.out.println("Inserted Annoumcement");
             }
-
+			
+			//INSERTING MARKS
             PreparedStatement psInsert4 = conn.prepareStatement("insert into Marks values (?,?,?,?,?,?)");
             in = new BufferedReader(new FileReader(MarksFile));
             sc = new Scanner(in);
@@ -169,7 +165,11 @@ public class SetDB {
         }
 
     }
-
+	
+	/**
+	 * Clears the database
+	 * @param conn The database connection object 
+     */
     void deleteAllTables(Connection conn) {
         try {
 
@@ -177,8 +177,6 @@ public class SetDB {
             Statement s;
             s = conn.createStatement();
             statements.add(s);
-            //s.execute("drop table location");
-            //System.out.println("Deleted table location ");
             s.execute("drop table StudentInfo");
             System.out.println("Deleted table StudentInfo ");
             s.execute("drop table VisitDetails");
@@ -192,7 +190,11 @@ public class SetDB {
             System.out.println(e);
         }
     }
-
+	
+	/**
+	 * Creates the required tables for the database
+	 * @param conn The database connection object 
+     */
     void createTables(Connection conn) {
         try {
 
@@ -215,16 +217,10 @@ public class SetDB {
         }
 
     }
-
-    private void parseArguments(String[] args) {
-        if (args.length > 0) {
-            if (args[0].equalsIgnoreCase("derbyclient")) {
-                framework = "derbyclient";
-                protocol = "jdbc:derby://localhost:1527/";
-            }
-        }
-    }
-    
+	
+	/**
+	 * Displays SQL Exceptions
+     */
     public static void printSQLException(SQLException e)
     {
         // Unwraps the entire exception chain to unveil the real cause of the
